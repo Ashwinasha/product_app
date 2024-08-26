@@ -31,7 +31,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <p class="card-text">{{ $product->category }}</p>
-                            <p class="card-text"><strong>${{ $product->price }}</strong></p>
+                            <p class="card-text"><strong>RS.{{ $product->price }}</strong></p>
                         </div>
                     </div>
                     <div class="position-absolute top-0 end-0 p-2">

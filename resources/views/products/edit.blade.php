@@ -111,61 +111,64 @@
                         </button>
                     </div>
                     
+                    
                     <div class="container mt-5">
-                        <div class="row">
-                            <!-- Main Image Upload -->
-                            <div class="col-md-8 d-flex justify-content-center">
-                                <div class=" main-upload d-flex justify-content-center align-items-center">
-                                    @if($product->main_image)
-                                    <img id="mainImagePreview" src="{{ asset('storage/products/5lTN4gCpU86KJjI4Lpwfg7ba3LeTeimHNn30oNzC.jpg') }}" alt="Main Image Preview" style="max-width: 100%;" />
+    <div class="d-flex justify-content-center mb-3">
+        <button type="button" id="add-row" class="btn btn-custom-edit w-100">
+            <i class="fas fa-pencil-alt"></i> Edit Image
+        </button>
+    </div>
+    <div class="row">
+        <!-- Main Image Upload -->
+        <div class="col-md-8 d-flex justify-content-center">
+            <div class="main-upload dashed-border-container">
+                <div class="image-wrapper">
+                    @if($product->main_image)
+                        <img id="mainImagePreview" src="{{ asset('storage/' . $product->main_image) }}" alt="Main Image Preview" />
+                    @else
+                        <img id="mainImagePreview" alt="Main Image Preview" style="display: none;" />
+                    @endif
+                </div>
+                <input type="file" name="main_image" id="mainImage" style="display: none;" />
+                <button class="upload-icon btn" type="button" onclick="document.getElementById('mainImage').click();">+</button>
+            </div>
+        </div>
 
-                                    @else
-                                        <img id="mainImagePreview" alt="Main Image Preview" style="display: none;" />
-                                    @endif
-                                    <input type="file" name="main_image" id="mainImage" style="display: none;" />
-                                    <button class="upload-icon btn" type="button" onclick="document.getElementById('mainImage').click();">+</button>
-                                </div>
+        <!-- Small Image Uploads -->
+        <div class="col-md-4">
+            <div class="row">
+                @foreach($product->small_images as $index => $image)
+                    <div class="col-12 mb-2 d-flex justify-content-center">
+                        <div class="small-upload dashed-border-container">
+                            <div class="image-wrapper2">
+                                @if($image) <!-- Check if image path is present -->
+                                    <img id="smallImagePreview{{ $index }}" src="{{ asset('storage/' . $image) }}" alt="Small Image Preview" />
+                                @else
+                                    <img id="smallImagePreview{{ $index }}" alt="Small Image Preview" style="display: none;" />
+                                @endif
                             </div>
-
-                            <!-- Small Image Uploads -->
-                            <div class="col-md-4">
-                                <div class="row">
-                                    @foreach($product->small_images as $index => $image)
-                                        <div class="col-12 mb-2 d-flex justify-content-center">
-                                            <div class=" small-upload d-flex justify-content-center align-items-center">
-                                                <img id="smallImagePreview{{ $index }}" src="{{ asset('storage/products/' . $image) }}" alt="Small Image Preview" style="max-width: 100%;" />
-                                                <input type="file" name="small_images[]" id="smallImage{{ $index }}" style="display: none;" />
-                                                <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImage{{ $index }}').click();">+</button>
-                                            </div>
-                                        </div>
-                                    @endforeach
-
-                                    <!-- Placeholder for additional small images -->
-                                    <div class="col-12 mb-2 d-flex justify-content-center">
-                                        <div class=" small-upload d-flex justify-content-center align-items-center">
-                                            <img id="smallImagePreviewNew" src="" alt="Small Image Preview" style="max-width: 100%; display: none;" />
-                                            <input type="file" name="small_images[]" id="smallImageNew" style="display: none;" />
-                                            <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImageNew').click();">+</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 mb-2 d-flex justify-content-center">
-                                        <div class=" small-upload d-flex justify-content-center align-items-center">
-                                            <img id="smallImagePreviewNew" src="" alt="Small Image Preview" style="max-width: 100%; display: none;" />
-                                            <input type="file" name="small_images[]" id="smallImageNew" style="display: none;" />
-                                            <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImageNew').click();">+</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 mb-2 d-flex justify-content-center">
-                                        <div class=" small-upload d-flex justify-content-center align-items-center">
-                                            <img id="smallImagePreviewNew" src="" alt="Small Image Preview" style="max-width: 100%; display: none;" />
-                                            <input type="file" name="small_images[]" id="smallImageNew" style="display: none;" />
-                                            <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImageNew').click();">+</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <input type="file" name="small_images[]" id="smallImage{{ $index }}" style="display: none;" />
+                            <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImage{{ $index }}').click();">+</button>
                         </div>
                     </div>
+                @endforeach
+
+                <!-- Placeholder for additional small images -->
+                @for ($i = count($product->small_images); $i < 3; $i++)
+                    <div class="col-12 mb-2 d-flex justify-content-center">
+                        <div class="small-upload dashed-border-container">
+                            <div class="image-wrapper2">
+                                <img id="smallImagePreviewNew{{ $i }}" src="" alt="Small Image Preview" style="display: none;" />
+                            </div>
+                            <input type="file" name="small_images[]" id="smallImageNew{{ $i }}" style="display: none;" />
+                            <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImageNew{{ $i }}').click();">+</button>
+                        </div>
+                    </div>
+                @endfor
+            </div>
+        </div>
+    </div>
+</div>
 
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary mt-4">Update</button>
