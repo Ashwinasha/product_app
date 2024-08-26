@@ -14,10 +14,10 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-3 g-5">
         @foreach($products as $product)
-            <div class="col-md-4 mb-4">
-                <div class="card card-custom-size card-3d-effect d-flex flex-row position-relative">
+            <div class="col">
+                <div class="card  card-3d-effect d-flex flex-row position-relative h-100">
                     <div class="col-4 d-flex align-items-center justify-content-center">
                         <div class="image-box">
                             @if($product->main_image)
