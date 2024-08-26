@@ -1,0 +1,182 @@
+.navbar {
+    background-color: rgb(75, 0, 0);
+}
+
+.navbar a.nav-link {
+    color: white;
+}
+
+.navbar a.nav-link:hover {
+    color: #f8f9fa; /* Optional: Change the text color on hover if needed */
+}
+.footer{
+    background-color: rgb(75, 0, 0);
+    color: white;
+}
+
+.btn-custom-primary {
+    background-color: rgb(75, 0, 0);
+    color: white;
+    width: 200px; /* Set the same width for both buttons */
+}
+
+.btn-custom-primary:hover {
+    background-color: rgb(120, 4, 4); 
+    color: white;
+}
+
+.btn-custom-secondary {
+    background-color: white;
+    color: rgb(75, 0, 0);
+    width: 200px; /* Set the same width for both buttons */
+    border: 1px solid rgb(75, 0, 0);
+}
+.btn-custom-secondary:hover {
+    background-color: #f8f9fa; /* Optional: lighten on hover */
+    color: brown;
+}
+
+.no-border {
+    border: none;
+}
+
+    .form-container {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+        transition: box-shadow 0.3s ease;
+        margin-bottom: 30px; /* Adjust the value as needed */
+    }
+    .form-container:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .upload-container {
+        border: 2px dashed #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        cursor: pointer;
+    }
+    
+    .main-upload {
+        height: 285px;
+        width: 100%;
+    }
+    
+    .small-upload {
+        height: 90px;
+        width: 100%;
+    }
+    
+    .upload-icon {
+        font-size: 2rem;
+        color: brown;
+    }
+    
+    .upload-icon:hover {
+        color: #0056b3;
+    }
+    .card-3d-effect {
+        transition: transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+    
+    .card-3d-effect:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card.card-custom-size {
+        width: 356px !important; /* Use !important to override other styles */
+        height: 124px !important;
+        overflow: hidden;
+    }
+    
+    .card.card-custom-size .card-body {
+        padding: 10px;
+        overflow: hidden;
+    }
+    
+    .card.card-custom-size img {
+        width: 100%;
+        height: auto;
+    }
+
+    .image-box {
+        width: 84px;
+        height: 84px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 5px;
+        background-color: #f8f9fa; /* Optional: background color for visibility */
+    }
+    
+    .image-box img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover; /* Ensures the image covers the box while maintaining aspect ratio */
+    }
+
+
+    .upload-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px dashed #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        cursor: pointer;
+    }
+    
+    .upload-container input[type="file"] {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0; /* Hide the default file input */
+        cursor: pointer;
+    }
+    
+    .upload-icon {
+        font-size: 24px;
+        color: black;
+        position: absolute;
+    }
+    
+    .upload-icon:hover {
+        color: #0056b3;
+    }
+    
+    .upload-container img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none; /* Hide the image preview by default */
+    }
+    
+    .upload-container img.show {
+        display: block; /* Show the image preview */
+    }
+    
+    .preview-image {
+        display: block; /* Ensure the preview images are visible */
+    }
+    
+    /* Add this to your app.css or custom CSS file */
+.custom-alert {
+    border: 2px solid #dc3545; /* Customize border color */
+    background-color: #f8d7da; /* Customize background color */
+    color: #721c24; /* Customize text color */
+    font-size: 1rem; /* Customize font size */
+}
+
+.custom-alert .btn-close {
+    filter: brightness(0) invert(1); /* Adjust close button color if needed */
+}
