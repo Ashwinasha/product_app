@@ -136,7 +136,8 @@ class ProductController extends Controller
         $product->save();
 
         // Redirect back to the edit form with a success message
-        return redirect()->route('products.edit', $product->id)->with('success', 'Product updated successfully!');
+        return redirect()->route('products.index')
+        ->with('success', 'Product updated successfully.');
     }
 
     public function destroy($id)
@@ -173,7 +174,9 @@ class ProductController extends Controller
             }
         }
 
-        return response()->json(['success' => true]);
+        
+        return redirect()->route('products.index')
+        ->with('success', 'Product deleted successfully.');
     }
 
     // Method to update an image

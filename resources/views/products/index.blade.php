@@ -2,6 +2,19 @@
 
 @section('content')
 <div class="container mt-5">
+    <!-- Display success message -->
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('delete_confirmation'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('delete_confirmation') }}
+        </div>
+    @endif
+
     <!-- Buttons for adding a new product and category management -->
     <div class="d-flex justify-content-end mb-4">
         <div class="d-flex flex-column align-items-end">
@@ -17,7 +30,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-5">
         @foreach($products as $product)
             <div class="col">
-                <div class="card  card-3d-effect d-flex flex-row position-relative h-100">
+                <div class="card card-3d-effect d-flex flex-row position-relative h-100">
                     <div class="col-4 d-flex align-items-center justify-content-center">
                         <div class="image-box">
                             @if($product->main_image)

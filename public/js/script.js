@@ -70,13 +70,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-document.querySelectorAll('input[type="file"]').forEach(input => {
+document.querySelectorAll('input[id^="smallImage"]').forEach(input => {
     input.addEventListener('change', function(event) {
         const fileInput = event.target;
         const file = fileInput.files[0];
         const reader = new FileReader();
 
         reader.onload = function(e) {
+            // Adjust the image preview ID based on the input ID
             const fileInputId = fileInput.id;
             const imagePreviewId = fileInputId.replace('smallImage', 'smallImagePreview').replace('New', 'New');
             const imageElement = document.getElementById(imagePreviewId);
@@ -92,3 +93,5 @@ document.querySelectorAll('input[type="file"]').forEach(input => {
         }
     });
 });
+
+

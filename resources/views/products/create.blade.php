@@ -96,6 +96,7 @@
                     </div>
 
                     <div class="container mt-5">
+                        <p class="justify-content-center d-flex">upload image</p>
         <div class="row">
             <!-- Main Image Upload -->
             <div class="col-md-8 d-flex justify-content-center">
