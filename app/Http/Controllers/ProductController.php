@@ -90,55 +90,64 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        // Validate the request data
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'model_number' => 'required|string|max:255',
-            'category' => 'required|string',
-            'product_details' => 'required|string',
-            'how_to_use' => 'required|string',
-            'shipping_details' => 'required|string',
-            'price' => 'required|numeric',
-            'weight' => 'required|numeric',
-            'qty_of_box' => 'required|integer',
-            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'small_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+{
+    // Validate the request data
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'model_number' => 'required|string|max:255',
+        'category' => 'required|string',
+        'product_details' => 'required|string',
+        'how_to_use' => 'required|string',
+        'shipping_details' => 'required|string',
+        'price' => 'required|numeric',
+        'weight' => 'required|numeric',
+        'qty_of_box' => 'required|integer',
+        'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'small_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        // Find the product by ID
-        $product = Product::findOrFail($id);
+    // Find the product by ID
+    $product = Product::findOrFail($id);
 
-        // Update product details
-        $product->fill($request->except(['main_image', 'small_images']));
+    // Update product details
+    $product->fill($request->except(['main_image', 'small_images']));
 
-        // Handle main image upload
-        if ($request->hasFile('main_image')) {
-            // Delete old main image if it exists
-            if ($product->main_image) {
-                Storage::delete('public/' . $product->main_image);
-            }
-            $path = $request->file('main_image')->store('products', 'public');
-            $product->main_image = $path;
+    // Handle main image upload
+    if ($request->hasFile('main_image')) {
+        // Delete old main image if it exists
+        if ($product->main_image) {
+            Storage::delete('public/' . $product->main_image);
         }
-
-        // Handle small images upload
-        if ($request->hasFile('small_images')) {
-            $smallImages = [];
-            foreach ($request->file('small_images') as $image) {
-                $path = $image->store('products', 'public');
-                $smallImages[] = $path;
-            }
-            $product->small_images = json_encode($smallImages);  // Store small images as JSON
-        }
-
-        // Save the updated product
-        $product->save();
-
-        // Redirect back to the edit form with a success message
-        return redirect()->route('products.index')
-        ->with('success', 'Product updated successfully.');
+        $path = $request->file('main_image')->store('products', 'public');
+        $product->main_image = $path;
     }
+
+    // Handle small images upload
+    if ($request->hasFile('small_images')) {
+        $smallImages = json_decode($product->small_images, true) ?? []; // Decode existing small images
+        
+        foreach ($request->file('small_images') as $index => $image) {
+            // Delete the old small image if a new one is uploaded for the same index
+            if (isset($smallImages[$index]) && $smallImages[$index]) {
+                Storage::delete('public/' . $smallImages[$index]);
+            }
+
+            // Store the new image
+            $path = $image->store('products', 'public');
+            $smallImages[$index] = $path; // Save or update image path
+        }
+
+        $product->small_images = json_encode($smallImages); // Store updated small images as JSON
+    }
+
+    // Save the updated product
+    $product->save();
+
+    // Redirect back to the edit form with a success message
+    return redirect()->route('products.index')
+        ->with('success', 'Product updated successfully.');
+}
+
 
     public function destroy($id)
 {

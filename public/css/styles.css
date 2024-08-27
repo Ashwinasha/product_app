@@ -212,3 +212,36 @@
         object-fit: cover; /* Fill the container while maintaining aspect ratio */
     }
 
+/* General styles for the delete icon */
+.delete-icon {
+    position: absolute;
+    cursor: pointer;
+    background-color: rgba(255, 0, 0, 0.7); /* Background color */
+    color: #fff; /* Text color */
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 16px;
+}
+
+/* Specific positioning for image-wrapper */
+.image-wrapper {
+    position: relative;
+}
+
+.image-wrapper .delete-icon {
+    top: 5px; /* Adjust top position */
+    right: 5px; /* Adjust right position */
+}
+
+/* Specific positioning for image-wrapper2 */
+.image-wrapper2 {
+    position: relative;
+}
+
+.image-wrapper2 .delete-icon {
+    top: -10px; /* Adjust top position */
+    right: -50px; /* Adjust right position */
+}
+
+    

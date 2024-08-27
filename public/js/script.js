@@ -95,3 +95,17 @@ document.querySelectorAll('input[id^="smallImage"]').forEach(input => {
 });
 
 
+function deleteImage(imageId) {
+    // Get the image and delete button elements by ID
+    const image = document.getElementById(imageId);
+    const deleteButton = image.nextElementSibling;
+    
+    // Hide the image and delete button
+    if (image) {
+        image.style.display = 'none';
+    }
+    if (deleteButton) {
+        deleteButton.style.display = 'none';
+    }
+}
+

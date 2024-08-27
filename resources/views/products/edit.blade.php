@@ -125,8 +125,10 @@
                 <div class="image-wrapper">
                     @if($product->main_image)
                         <img id="mainImagePreview" src="{{ asset('storage/' . $product->main_image) }}" alt="Main Image Preview" />
+                        <button class="delete-icon" type="button" onclick="deleteImage('mainImagePreview')"><i class="fas fa-trash-alt"></i></button>
                     @else
                         <img id="mainImagePreview" alt="Main Image Preview" style="display: none;" />
+                        <button class="delete-icon" type="button" onclick="deleteImage('mainImagePreview')" style="display: none;"><i class="fas fa-trash-alt"></i></button>
                     @endif
                 </div>
                 <input type="file" name="main_image" id="mainImage" style="display: none;" />
@@ -141,10 +143,12 @@
                     <div class="col-12 mb-2 d-flex justify-content-center">
                         <div class="small-upload dashed-border-container">
                             <div class="image-wrapper2">
-                                @if($image) <!-- Check if image path is present -->
+                                @if($image)
                                     <img id="smallImagePreview{{ $index }}" src="{{ asset('storage/' . $image) }}" alt="Small Image Preview" />
+                                    <button class="delete-icon" type="button" onclick="deleteImage('smallImagePreview{{ $index }}')"><i class="fas fa-trash-alt"></i></button>
                                 @else
                                     <img id="smallImagePreview{{ $index }}" alt="Small Image Preview" style="display: none;" />
+                                    <button class="delete-icon" type="button" onclick="deleteImage('smallImagePreview{{ $index }}')" style="display: none;"><i class="fas fa-trash-alt"></i></button>
                                 @endif
                             </div>
                             <input type="file" name="small_images[]" id="smallImage{{ $index }}" style="display: none;" />
@@ -159,6 +163,7 @@
                         <div class="small-upload dashed-border-container">
                             <div class="image-wrapper2">
                                 <img id="smallImagePreviewNew{{ $i }}" src="" alt="Small Image Preview" style="display: none;" />
+                                <button class="delete-icon" type="button" onclick="deleteImage('smallImagePreviewNew{{ $i }}')" style="display: none;"><i class="fas fa-trash-alt"></i></button>
                             </div>
                             <input type="file" name="small_images[]" id="smallImageNew{{ $i }}" style="display: none;" />
                             <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImageNew{{ $i }}').click();">+</button>
