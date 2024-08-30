@@ -1,13 +1,13 @@
-
 document.addEventListener('DOMContentLoaded', function () {
-    const addRowButton = document.getElementById('add-row');
-    const tableBody = document.querySelector('.table tbody');
-    
-    addRowButton.addEventListener('click', function () {
+    let rowIndex = 1; // Initialize with the first row index
+
+    document.getElementById('add-row').addEventListener('click', function () {
+        rowIndex++; // Increment row index
+
         // Create a new row element
         const newRow = document.createElement('tr');
-        
-        // Define the new row content
+        newRow.id = `row-${rowIndex}`;
+
         newRow.innerHTML = `
             <td>
                 <input type="number" class="form-control no-border" name="price[]" step="0.01" required>
@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 <input type="number" class="form-control no-border" name="qty_of_box[]" required>
             </td>
         `;
-        
+
         // Append the new row to the table body
-        tableBody.appendChild(newRow);
+        document.querySelector('#productTable tbody').appendChild(newRow);
     });
 });
 
@@ -204,3 +204,88 @@ function previewMainImage(event) {
         reader.readAsDataURL(image.files[0]);
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const addRowButton = document.getElementById('add-row');
+    const tableBody = document.getElementById('product-attributes');
+
+    addRowButton.addEventListener('click', function () {
+        // Create a new row element
+        const newRow = document.createElement('tr');
+
+        // Create the new row's HTML content
+        newRow.innerHTML = `
+            <td>
+                <input type="number" class="form-control" name="price[]" step="0.01" required>
+            </td>
+            <td>
+                <input type="number" class="form-control" name="weight[]" step="0.01" required>
+            </td>
+            <td>
+                <input type="number" class="form-control" name="qty_of_box[]" required>
+            </td>
+        `;
+
+        // Append the new row to the table body
+        tableBody.appendChild(newRow);
+    });
+});
+
+// Ensure the script runs only after the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function () {
+    function deleteImage(previewId, deleteId) {
+        const imageElement = document.getElementById(previewId);
+        const deleteButton = document.getElementById(deleteId);
+
+        if (imageElement) {
+            imageElement.src = '';
+            imageElement.style.display = 'none'; // Hide the image
+        }
+
+        if (deleteButton) {
+            deleteButton.style.display = 'none'; // Hide the delete button
+        }
+
+        // Show the upload button if needed
+        const uploadButton = deleteButton.nextElementSibling;
+        if (uploadButton) {
+            uploadButton.style.display = 'block';
+        }
+    }
+
+    function handleImageUpload(inputId, previewId, deleteId) {
+        const inputElement = document.getElementById(inputId);
+        const previewElement = document.getElementById(previewId);
+        const deleteButton = document.getElementById(deleteId);
+
+        inputElement.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewElement.src = e.target.result;
+                    previewElement.style.display = 'block';
+                    if (deleteButton) {
+                        deleteButton.style.display = 'block'; // Show the delete button
+                    }
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewElement.style.display = 'none';
+                if (deleteButton) {
+                    deleteButton.style.display = 'none'; // Hide the delete button
+                }
+            }
+        });
+    }
+
+    // Initialize main image upload
+    const { mainImage, smallImages } = window.imageData;
+    handleImageUpload(mainImage.inputId, mainImage.previewId, mainImage.deleteId);
+
+    // Initialize small image uploads
+    smallImages.forEach(image => {
+        handleImageUpload(image.inputId, image.previewId, image.deleteId);
+    });
+});
+

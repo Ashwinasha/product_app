@@ -38,8 +38,6 @@
     </div>
 </div>
 
-
 <link rel="stylesheet" href="{{ asset('css/category_style.css') }}">
 @endsection
-
 

@@ -132,3 +132,73 @@
     display: block; /* Show the preview image by default */
 }
 
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.header-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.category-management-container {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.add-new-category-btn {
+    background-color: brown;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.category-management-table {
+    width: 100%;
+}
+
+.category-management-table th, .category-management-table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+}
+
+.image-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-number {
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.image-container {
+    width: 100px;
+    height: 100px;
+    border: none;
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+

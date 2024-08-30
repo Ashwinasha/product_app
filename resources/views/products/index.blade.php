@@ -42,15 +42,27 @@
                     </div>
                     <div class="col-8">
                         <div class="card-body">
-                            <p class="card-text">{{ $product->name }}</p>
-                            <p class="card-text">{{ $product->category }}</p>
-                            <p class="card-text">RS.{{ $product->price }}</p>
+                            <p class="card-text"><strong>{{ $product->name }}</strong></p>
+                            <p class="card-text">Category: {{ $product->category }}</p>
+                            
+                            <!-- Display only the first price from the price array -->
+                            @php
+                                $prices = json_decode($product->prices, true);
+                            @endphp
+                            @if(is_array($prices) && count($prices) > 0)
+                                @php
+                                    $firstPrice = $prices[0];
+                                @endphp
+                                <p class="card-text">Price: RS. {{ number_format($firstPrice['price'], 2) }}</p>
+                            @else
+                                <p class="card-text">Price: Not Available</p>
+                            @endif
                         </div>
                     </div>
-                    <div class="position-absolute top-0 end-0 p-2 ">
+                    <div class="position-absolute top-0 end-0 p-2">
                         <!-- Edit Icon -->
-                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-link  p-0 me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                            <i style="color:black;"class="fas fa-pencil-alt"></i>
+                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-link p-0 me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                            <i style="color:black;" class="fas fa-pencil-alt"></i>
                         </a>
                         <!-- Delete Icon -->
                         <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
@@ -66,10 +78,8 @@
         @endforeach
     </div>
 
-    <div class="d-flex justify-content-center mt-4 custom-pagination ">
-    {{ $products->links('vendor.pagination.custom-bootstrap') }}
+    <div class="d-flex justify-content-center mt-4 custom-pagination">
+        {{ $products->links('vendor.pagination.custom-bootstrap') }}
     </div>
 </div>
 @endsection
-
-

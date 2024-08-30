@@ -24,7 +24,9 @@
             <tr>
                 <td class="image-cell">
                     <span class="slider-number">{{ $index + 1 }}</span>
-                    <img src="{{ asset('storage/slider_images/' . $slider->image) }}" alt="Slider Image">
+                    <div class="image-container">
+                        <img src="{{ asset('storage/slider_images/' . $slider->image) }}" alt="Slider Image" class="slider-image">
+                    </div>
                 </td>
                 <td>{{ $slider->button_name }}</td>
                 <td>

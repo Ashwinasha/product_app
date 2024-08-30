@@ -65,35 +65,35 @@
                         <textarea class="form-control" id="shipping_details" name="shipping_details" rows="3" required></textarea>
                     </div>
 
-                    <!-- Pricing and Quantity Fields -->
-                    <table class="table mb-3">
-                        <thead>
-                            <tr>
-                                <th>Price</th>
-                                <th>Weight</th>
-                                <th>QTY of a box</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input type="number" class="form-control no-border" name="price" step="0.01" required>
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control no-border" name="weight" step="0.01" required>
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control no-border" name="qty_of_box" required>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <table class="table mb-3" id="productTable">
+    <thead>
+        <tr>
+            <th>Price</th>
+            <th>Weight</th>
+            <th>QTY of a box</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Initial row (can be empty or contain default values) -->
+        <tr id="row-1">
+            <td>
+                <input type="number" class="form-control no-border" name="price[]" step="0.01" required>
+            </td>
+            <td>
+                <input type="number" class="form-control no-border" name="weight[]" step="0.01" required>
+            </td>
+            <td>
+                <input type="number" class="form-control no-border" name="qty_of_box[]" required>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
-                    <div class="d-flex justify-content-center mb-3">
-                        <button type="button" id="add-row" class="btn btn-secondary w-100">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
+<div class="d-flex justify-content-center mb-3">
+    <button type="button" id="add-row" class="btn btn-secondary w-100">
+        <i class="fas fa-plus"></i> Add Row
+    </button>
+</div>
 
                     <!-- Image Upload Section -->
 <!-- Image Upload Section -->

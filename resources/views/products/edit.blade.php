@@ -65,7 +65,6 @@
                         </div>
                     </div>
 
-
                     <div class="mb-3">
                         <label for="product_details" class="form-label">Product Details</label>
                         <textarea class="form-control" id="product_details" name="product_details" rows="3" required>{{ old('product_details', $product->product_details) }}</textarea>
@@ -82,7 +81,7 @@
                     </div>
 
                     <!-- Pricing and Quantity Fields -->
-                    <table class="table mb-3">
+                    <table class="table mb-3" id="productTable">
                         <thead>
                             <tr>
                                 <th>Price</th>
@@ -91,17 +90,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <input type="number" class="form-control" name="price" step="0.01" value="{{ old('price', $product->price) }}" required>
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control" name="weight" step="0.01" value="{{ old('weight', $product->weight) }}" required>
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control" name="qty_of_box" value="{{ old('qty_of_box', $product->qty_of_box) }}" required>
-                                </td>
-                            </tr>
+                            @foreach ($product->prices as $index => $data)
+                                <tr>
+                                    <td>
+                                        <input type="number" class="form-control" name="price[]" step="0.01" value="{{ old('price.' . $index, $data['price']) }}" required>
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control" name="weight[]" step="0.01" value="{{ old('weight.' . $index, $data['weight']) }}" required>
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control" name="qty_of_box[]" value="{{ old('qty_of_box.' . $index, $data['qty_of_box']) }}" required>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
@@ -110,71 +111,49 @@
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
-                    
-                    
-                    <div class="container mt-5">
-                    <div class="container mt-4 justify-content-center">
-                    <div class="d-flex justify-content-center mb-3">
-                        <button type="button" id="add-row" class="btn btn-custom-edit w-100">
-                            <i class="fas fa-pencil-alt"></i> Edit Image
-                        </button>
-    </div>
-    <div class="row pd-5 px-5">
-        <!-- Main Image Upload -->
-        <div class="col-md-8 d-flex justify-content-center">
-            <div class="main-upload dashed-border-container mb-2">
-                <div class="image-wrapper">
-                    @if($product->main_image)
-                        <img id="mainImagePreview" src="{{ asset('storage/' . $product->main_image) }}" alt="Main Image Preview" />
-                        
-                        <img id="mainImagePreview" alt="Main Image Preview" style="display: none;" />
-                        
-                    @endif
-                </div>
-                <input type="file" name="main_image" id="mainImage" style="display: none;" />
-                <button class="upload-icon btn" type="button" onclick="document.getElementById('mainImage').click();">+</button>
-            </div>
-        </div>
 
-        <!-- Small Image Uploads -->
-        <div class="col-md-4">
-            <div class="row">
-                @foreach($product->small_images as $index => $image)
-                    <div class="col-12 mb-2 d-flex justify-content-center">
-                        <div class="small-upload dashed-border-container">
-                            <div class="image-wrapper2">
-                                @if($image)
-                                    <img id="smallImagePreview{{ $index }}" src="{{ asset('storage/' . $image) }}" alt="Small Image Preview" />
-                                    
-                                @else
-                                    <img id="smallImagePreview{{ $index }}" alt="Small Image Preview" style="display: none;" />
-                                    
-                                @endif
+                    <div class="row pd-5 px-5">
+                                <!-- Main Image Upload -->
+                                <div class="col-md-8 d-flex justify-content-center">
+                                    <div class="main-upload dashed-border-container mb-2">
+                                        <div class="image-wrapper">
+                                            <img id="mainImagePreview" src="{{ $product->main_image ? asset('storage/' . $product->main_image) : '' }}" alt="Main Image Preview" />
+                                        </div>
+                                        <input type="file" name="main_image" id="mainImage" style="display: none;" />
+                                        <button class="upload-icon btn" type="button" onclick="document.getElementById('mainImage').click();">+</button>
+                                    </div>
+                                </div>
+
+                                <!-- Small Image Uploads -->
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        @foreach($smallImages as $index => $image)
+                                            <div class="col-12 mb-2 d-flex justify-content-center">
+                                                <div class="small-upload dashed-border-container">
+                                                    <div class="image-wrapper2">
+                                                        <img id="smallImagePreview{{ $index }}" src="{{ asset('storage/' . $image) }}" alt="Small Image Preview" />
+                                                    </div>
+                                                    <input type="file" name="small_images[]" id="smallImage{{ $index }}" style="display: none;" />
+                                                    <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImage{{ $index }}').click();">+</button>
+                                                </div>
+                                            </div>
+                                        @endforeach
+
+                                        <!-- Placeholder for additional small images -->
+                                        @for ($i = count($smallImages); $i < 3; $i++)
+                                            <div class="col-12 mb-2 d-flex justify-content-center">
+                                                <div class="small-upload dashed-border-container">
+                                                    <div class="image-wrapper2">
+                                                        <img id="smallImagePreviewNew{{ $i }}" src="" alt="Small Image Preview" style="display: none;" />
+                                                    </div>
+                                                    <input type="file" name="small_images[]" id="smallImageNew{{ $i }}" style="display: none;" />
+                                                    <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImageNew{{ $i }}').click();">+</button>
+                                                </div>
+                                            </div>
+                                        @endfor
+                                    </div>
+                                </div>
                             </div>
-                            <input type="file" name="small_images[]" id="smallImage{{ $index }}" style="display: none;" />
-                            <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImage{{ $index }}').click();">+</button>
-                        </div>
-                    </div>
-                @endforeach
-
-                <!-- Placeholder for additional small images -->
-                @for ($i = count($product->small_images); $i < 3; $i++)
-                    <div class="col-12 mb-2 d-flex justify-content-center">
-                        <div class="small-upload dashed-border-container">
-                            <div class="image-wrapper2">
-                                <img id="smallImagePreviewNew{{ $i }}" src="" alt="Small Image Preview" style="display: none;" />
-                            </div>
-                            <input type="file" name="small_images[]" id="smallImageNew{{ $i }}" style="display: none;" />
-                            <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImageNew{{ $i }}').click();">+</button>
-                        </div>
-                    </div>
-                @endfor
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary mt-4">Update</button>
                     </div>
