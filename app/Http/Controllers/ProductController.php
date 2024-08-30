@@ -160,33 +160,49 @@ class ProductController extends Controller
                      ->with('delete_confirmation', 'Product deleted successfully.');
 }
 
-    public function deleteImage(Request $request, $id)
-    {
-        $product = Product::findOrFail($id);
+public function deleteImage(Request $request)
+{
+    $imageType = $request->input('image_type');
+    $imageId = $request->input('image_id');
+    $productId = $request->input('product_id');
 
-        if ($request->image === 'main') {
-            // Delete the main image
-            if ($product->main_image) {
-                Storage::delete('public/' . $product->main_image);
-                $product->main_image = null;
-                $product->save();
-            }
-        } else {
-            // Delete small image
-            $smallImages = json_decode($product->small_images, true) ?? [];
+    // Retrieve the product
+    $product = Product::find($productId);
 
-            if (($key = array_search($request->image, $smallImages)) !== false) {
-                unset($smallImages[$key]);
-                Storage::delete('public/' . $request->image);
-                $product->small_images = json_encode(array_values($smallImages));
-                $product->save();
-            }
-        }
-
-        
-        return redirect()->route('products.index')
-        ->with('success', 'Product deleted successfully.');
+    if (!$product) {
+        return response()->json(['success' => false, 'message' => 'Product not found']);
     }
+
+    // Handle main image deletion
+    if ($imageType === 'main_image' && $product->main_image) {
+        $deleted = Storage::delete('public/' . $product->main_image);
+        if ($deleted) {
+            $product->main_image = null;
+            $product->save();
+            return response()->json(['success' => true, 'message' => 'Main image deleted']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Main image deletion failed']);
+        }
+    }
+
+    // Handle small image deletion
+    if ($imageType === 'small_images' && isset($product->small_images[$imageId])) {
+        $smallImages = $product->small_images;
+        $deleted = Storage::delete('public/' . $smallImages[$imageId]);
+        if ($deleted) {
+            unset($smallImages[$imageId]);
+            $product->small_images = array_values($smallImages); // Re-index the array
+            $product->save();
+            return response()->json(['success' => true, 'message' => 'Small image deleted']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Small image deletion failed']);
+        }
+    }
+
+    return response()->json(['success' => false, 'message' => 'Image deletion failed']);
+}
+
+
 
     // Method to update an image
     public function updateImage(Request $request, $id)

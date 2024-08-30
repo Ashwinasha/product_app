@@ -95,17 +95,112 @@ document.querySelectorAll('input[id^="smallImage"]').forEach(input => {
 });
 
 
-function deleteImage(imageId) {
-    // Get the image and delete button elements by ID
-    const image = document.getElementById(imageId);
-    const deleteButton = image.nextElementSibling;
+function previewMainImage(event) {
+    const image = document.getElementById('image');
+    const preview = document.getElementById('mainImagePreview');
     
-    // Hide the image and delete button
-    if (image) {
-        image.style.display = 'none';
-    }
-    if (deleteButton) {
-        deleteButton.style.display = 'none';
+    if (image.files && image.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        }
+        
+        reader.readAsDataURL(image.files[0]);
     }
 }
 
+function deleteImage(imageId, imageType, productId) {
+    console.log("Deleting image with ID:", imageId);
+
+    var imageElement = document.getElementById(imageId);
+    console.log("Image element:", imageElement);
+
+    if (imageElement && imageElement.style.display !== 'none') {
+        if (imageElement.src) {
+            imageElement.removeAttribute('src');
+            imageElement.style.display = 'none';
+
+            var deleteButton = imageElement.nextElementSibling;
+            if (deleteButton) {
+                deleteButton.style.display = 'none';
+            }
+
+            // Use fetch API to delete the image
+            fetch('/delete-image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    image_id: imageId,
+                    image_type: imageType,
+                    product_id: productId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Image deleted successfully.');
+                } else {
+                    console.error('Image deletion failed.');
+                }
+            })
+            .catch(error => {
+                console.error('Error occurred while deleting image:', error);
+            });
+        } else {
+            console.error("Image source is missing. Skipping deletion.");
+        }
+    } else {
+        console.error("Image element is hidden or not found. Skipping deletion.");
+    }
+}
+
+function confirmDelete() {
+    return confirm('Are you sure you want to delete this category?');
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var fileInput = document.getElementById('category_image');
+    var preview = document.getElementById('category_image_preview');
+    var uploadIcon = document.querySelector('.category-upload-icon');
+
+    // Trigger the file input click when the upload icon is clicked
+    uploadIcon.addEventListener('click', function() {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', function(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block'; // Show the image preview
+        };
+
+        if (file) {
+            reader.readAsDataURL(file); // Convert the file to a base64 URL
+        }
+    });
+})
+
+function previewMainImage(event) {
+    const image = document.getElementById('image');
+    const preview = document.getElementById('mainImagePreview');
+    
+    if (image.files && image.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        }
+        
+        reader.readAsDataURL(image.files[0]);
+    }
+}

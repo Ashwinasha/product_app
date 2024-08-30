@@ -21,7 +21,7 @@
             <a href="{{ route('products.create') }}" class="btn btn-custom-primary mb-2 w-100">
                 <i class="fas fa-plus me-2"></i> Add New Product
             </a>
-            <a href="#" class="btn btn-custom-secondary w-100">
+            <a href="{{ route('categories.index') }}" class="btn btn-custom-secondary w-100">
                 Category Management
             </a>
         </div>
@@ -42,22 +42,22 @@
                     </div>
                     <div class="col-8">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <p class="card-text">{{ $product->name }}</p>
                             <p class="card-text">{{ $product->category }}</p>
-                            <p class="card-text"><strong>RS.{{ $product->price }}</strong></p>
+                            <p class="card-text">RS.{{ $product->price }}</p>
                         </div>
                     </div>
-                    <div class="position-absolute top-0 end-0 p-2">
+                    <div class="position-absolute top-0 end-0 p-2 ">
                         <!-- Edit Icon -->
-                        <a href="{{ route('products.edit', $product->id) }}" class="text-primary me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                            <i class="fas fa-pencil-alt"></i>
+                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-link  p-0 me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                            <i style="color:black;"class="fas fa-pencil-alt"></i>
                         </a>
                         <!-- Delete Icon -->
                         <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-link text-danger p-0" onclick="return confirm('Are you sure you want to delete this product?');" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                <i class="fas fa-trash"></i>
+                            <button type="submit" class="btn btn-link p-0 me-3" onclick="return confirm('Are you sure you want to delete this product?');" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                <i class="fas fa-trash" style="color:black;"></i>
                             </button>
                         </form>
                     </div>
@@ -66,8 +66,10 @@
         @endforeach
     </div>
 
-    <div class="d-flex justify-content-center mt-4">
-        {{ $products->links('pagination::bootstrap-4') }}
+    <div class="d-flex justify-content-center mt-4 custom-pagination ">
+    {{ $products->links('vendor.pagination.custom-bootstrap') }}
     </div>
 </div>
 @endsection
+
+

@@ -145,21 +145,51 @@
         font-size: 24px;
         color: black;
         position: absolute;
+        border-radius: 100%; /* Makes the background circular */
+        padding: 5px; /* Adjust padding to size the circle */
     }
+    
     
     .upload-icon:hover {
         color: #0056b3;
     }
     
     .upload-container img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: cover;
-        position: relative;
-        top: 0;
-        left: 0;
-        display: none; /* Hide the image preview by default */
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;/* Hide the image preview by default */
     }
+
+    .upload-container2 {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px dashed #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        cursor: pointer;
+    }
+    
+    .upload-container2 input[type="file"] {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0; /* Hide the default file input */
+        cursor: pointer;
+    }
+    .upload-container2 img {
+        width: 75px;
+        height: 75px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;/* Hide the image preview by default */
+    }
+    
     
     .upload-container img.show {
         display: block; /* Show the image preview */
@@ -201,14 +231,17 @@
     }
 
     .image-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Fill the container while maintaining aspect ratio */
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
     }
 
     .image-wrapper2 img {
-        width: 50px;
-        height: 50px;
+        width: 75px;
+        height: 75px;
         object-fit: cover; /* Fill the container while maintaining aspect ratio */
     }
 
@@ -221,7 +254,7 @@
     border: none;
     border-radius: 50%;
     padding: 5px;
-    font-size: 16px;
+    font-size: 10px;
 }
 
 /* Specific positioning for image-wrapper */
@@ -230,8 +263,8 @@
 }
 
 .image-wrapper .delete-icon {
-    top: 5px; /* Adjust top position */
-    right: 5px; /* Adjust right position */
+    top: 2px; /* Adjust top position */
+    right: 2px; /* Adjust right position */
 }
 
 /* Specific positioning for image-wrapper2 */
@@ -240,8 +273,106 @@
 }
 
 .image-wrapper2 .delete-icon {
-    top: -10px; /* Adjust top position */
-    right: -50px; /* Adjust right position */
+    top: -3px; /* Adjust top position */
+    right: -42px; /* Adjust right position */
 }
 
-    
+.card-text {
+    margin: 0; /* Removes any default margin */
+    padding: 0; /* Removes any default padding */
+    line-height: 2.0; /* Optional: Adjusts line height if you want the text to be closer together */
+}
+.page-item .page-link {
+    border: none;
+    padding: 0.5rem 1rem;
+    color: black; /* Color for pagination numbers and arrows */
+    text-align: center; 
+}
+
+.page-item.active .page-link {
+    color: black; /* Color for the active page */
+    background-color: white;
+    border: 1px solid black;
+}
+
+.page-item.disabled .page-link {
+    color: black; /* Color for disabled items */
+}
+
+/* Optional: Ensure the page-link has no border or background */
+.page-item .page-link {
+    border: 0;
+    background: transparent;
+}
+
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.header-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.category-management-container {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.add-new-category-btn {
+    background-color: brown;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.category-management-table {
+    width: 100%;
+}
+
+.category-management-table th, .category-management-table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+}
+
+.image-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-number {
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.image-container {
+    width: 100px;
+    height: 100px;
+    border: none;
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+

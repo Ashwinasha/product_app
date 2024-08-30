@@ -15,7 +15,7 @@
           <a class="nav-link" href="{{ route('products.index') }}">Product Management</a>
         </li>
         <li class="nav-item me-5">
-          <a class="nav-link" href="#">Slider Management</a>
+          <a class="nav-link" href="{{ route('slider.index') }}">Slider Management</a>
         </li>
       </ul>
     </div>

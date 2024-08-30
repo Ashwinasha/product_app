@@ -95,48 +95,52 @@
                         </button>
                     </div>
 
-                    <div class="container mt-5">
-                        <p class="justify-content-center d-flex">upload image</p>
-        <div class="row">
-            <!-- Main Image Upload -->
-            <div class="col-md-8 d-flex justify-content-center">
-                <div class="upload-container main-upload d-flex justify-content-center align-items-center">
-                    <img id="mainImagePreview" alt="Image preview" style="display: none;" />
-                    <input type="file" name="main_image" id="mainImage" style="display: none;" />
-                    <button class="upload-icon btn" type="button" onclick="document.getElementById('mainImage').click();">+</button>
-                </div>
+                    <!-- Image Upload Section -->
+<!-- Image Upload Section -->
+<div class="container mt-4">
+    <p class="text-center">Upload Image</p>
+    <div class="row justify-content-center pd-5 px-5">
+        <!-- Main Image Upload -->
+        <div class="col-md-8 d-flex justify-content-center mb-2">
+            <div class="upload-container main-upload d-flex justify-content-center align-items-center">
+                <img id="mainImagePreview" alt="Image preview" style="display: none;" />
+                <input type="file" name="main_image" id="mainImage" style="display: none;" />
+                <button class="upload-icon btn" type="button" onclick="document.getElementById('mainImage').click();">+</button>
             </div>
-            <!-- Small Image Uploads -->
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-12 mb-2 d-flex justify-content-center">
-                        <div class="upload-container small-upload d-flex justify-content-center align-items-center">
-                            <img id="smallImagePreview1" alt="Image preview" style="display: none;" />
-                            <input type="file" name="small_images[]" id="smallImage1" style="display: none;" />
-                            <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImage1').click();">+</button>
-                        </div>
+        </div>
+        <!-- Small Image Uploads -->
+        <div class="col-md-4">
+            <div class="row justify-content-center">
+                <div class="col-12 mb-2 d-flex justify-content-center">
+                    <div class="upload-container2 small-upload d-flex justify-content-center align-items-center">
+                        <img id="smallImagePreview1" alt="Image preview" style="display: none;" />
+                        <input type="file" name="small_images[]" id="smallImage1" style="display: none;" />
+                        <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImage1').click();">+</button>
                     </div>
-                    <!-- Repeat for other small uploads -->
-                    <div class="col-12 mb-2 d-flex justify-content-center">
-                        <div class="upload-container small-upload d-flex justify-content-center align-items-center">
-                            <img id="smallImagePreview2" alt="Image preview" style="display: none;" />
-                            <input type="file" name="small_images[]" id="smallImage2" style="display: none;" />
-                            <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImage2').click();">+</button>
-                        </div>
+                </div>
+                <!-- Repeat for other small uploads -->
+                <div class="col-12 mb-2 d-flex justify-content-center">
+                    <div class="upload-container2 small-upload d-flex justify-content-center align-items-center">
+                        <img id="smallImagePreview2" alt="Image preview" style="display: none;" />
+                        <input type="file" name="small_images[]" id="smallImage2" style="display: none;" />
+                        <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImage2').click();">+</button>
                     </div>
-                    <div class="col-12 d-flex justify-content-center">
-                        <div class="upload-container small-upload d-flex justify-content-center align-items-center">
-                            <img id="smallImagePreview3" alt="Image preview" style="display: none;" />
-                            <input type="file" name="small_images[]" id="smallImage3" style="display: none;" />
-                            <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImage3').click();">+</button>
-                        </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="upload-container2 small-upload d-flex justify-content-center align-items-center">
+                        <img id="smallImagePreview3" alt="Image preview" style="display: none;" />
+                        <input type="file" name="small_images[]" id="smallImage3" style="display: none;" />
+                        <button class="upload-icon btn" type="button" onclick="document.getElementById('smallImage3').click();">+</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
 
                     <div class="d-flex justify-content-center ">
-                    <button type="submit" class="btn btn-primary mt-4">Save</button>
+                        <button type="submit" class="btn btn-primary mt-4">Save</button>
                     </div>
                 </form>
             </div>
@@ -144,3 +148,4 @@
     </div>
 </div>
 @endsection
+
