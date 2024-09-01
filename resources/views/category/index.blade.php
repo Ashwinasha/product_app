@@ -3,6 +3,12 @@
 @section('content')
 
 <div class="container mt-5">
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <h4>Category Management</h4>
     <div class="content-wrapper">
         <div class="category-management-container">
@@ -48,7 +54,6 @@
         </div>
     </div>
 </div>
-
 
 <link rel="stylesheet" href="{{ asset('css/category_style.css') }}">
 @endsection

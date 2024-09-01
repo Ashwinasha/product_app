@@ -77,7 +77,7 @@ class ProductController extends Controller
         $product->save();
     
         // Redirect back to the create form with a success message
-        return redirect()->route('products.create')->with('success', 'Product added successfully!');
+        return redirect()->route('products.index')->with('success', 'Product added successfully!');
     }
     
 
@@ -194,7 +194,7 @@ public function update(Request $request, $id)
     $product->save();
 
     // Redirect back to the edit form with a success message
-    return redirect()->route('products.edit', $product->id)->with('success', 'Product updated successfully!');
+    return redirect()->route('products.index', $product->id)->with('success', 'Product updated successfully!');
 }
 
     
